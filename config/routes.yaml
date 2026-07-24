@@ -1,0 +1,3 @@
+letkode_data_provider:
+    resource: '@LetkodeDataProviderBundle/src/Controller/'
+    type: attribute

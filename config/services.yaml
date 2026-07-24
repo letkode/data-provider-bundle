@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Letkode\DataProviderBundle\:
+        resource: '../src/'
+        exclude:
+            - '../src/DataProviderBundle.php'
+            - '../src/Attribute/'
+            - '../src/Exception/'

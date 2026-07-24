@@ -1,0 +1,34 @@
+{
+    "name": "letkode/data-provider-bundle",
+    "description": "Attribute-driven, namespaced data provider registry and endpoint for Symfony applications",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "symfony/dependency-injection": "^7.0 || ^8.0",
+        "symfony/framework-bundle": "^7.0 || ^8.0",
+        "symfony/routing": "^7.0 || ^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11",
+        "phpstan/phpstan": "^2",
+        "friendsofphp/php-cs-fixer": "^3.95"
+    },
+    "autoload": {
+        "psr-4": {
+            "Letkode\\DataProviderBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Letkode\\DataProviderBundle\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "symfony": {
+            "bundles": {
+                "Letkode\\DataProviderBundle\\DataProviderBundle": ["all"]
+            }
+        }
+    }
+}
