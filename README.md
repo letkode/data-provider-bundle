@@ -84,6 +84,19 @@ final class CountrySearchService
 GET /api/providers/search/countries/by-name?q=chi
 ```
 
+### 4. Discover providers within a group
+
+```
+GET /api/providers/form-options
+```
+
+```json
+[
+    { "alias": "countries", "methods": ["active"] },
+    { "alias": "roles", "methods": ["list"] }
+]
+```
+
 ---
 
 ## How it works
@@ -91,6 +104,7 @@ GET /api/providers/search/countries/by-name?q=chi
 - `DataProviderBundle::build()` calls `registerAttributeForAutoconfiguration()` so any service annotated with `#[DataProvider]` is automatically tagged as `letkode.data_provider`.
 - `ProviderRegistry` collects all tagged providers via `#[AutowireIterator]` and indexes them in three levels: `providerGroup → classAlias → methodAlias`.
 - `DataProviderController` resolves `providerGroup` + `classAlias` + `methodAlias` and returns the result as JSON. Query parameters, if present, are passed as a single array argument to the resolved method.
+- `DataProviderController` also exposes `GET /api/providers/{providerGroup}` to list every provider and its exposed methods within a given group, for runtime discovery.
 
 ---
 

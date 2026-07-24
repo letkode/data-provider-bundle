@@ -172,6 +172,38 @@ final class ProviderRegistryTest extends TestCase
         self::assertNotContains('notExposed', $countriesEntry['methods']);
     }
 
+    public function testGetGroupMapFiltersByProviderGroup(): void
+    {
+        $registry = $this->makeRegistry([new StubCountryProvider(), new StubRoleProvider(), new StubCountrySearchProvider()]);
+
+        $map = $registry->getGroupMap('form-options');
+
+        self::assertCount(2, $map);
+        $aliases = array_column($map, 'alias');
+        self::assertContains('countries', $aliases);
+        self::assertContains('roles', $aliases);
+    }
+
+    public function testGetGroupMapDoesNotIncludeOtherGroups(): void
+    {
+        $registry = $this->makeRegistry([new StubCountryProvider(), new StubCountrySearchProvider()]);
+
+        $map = $registry->getGroupMap('search');
+
+        self::assertCount(1, $map);
+        self::assertSame('countries', $map[0]['alias']);
+        self::assertSame(['by-name'], $map[0]['methods']);
+    }
+
+    public function testGetGroupMapThrowsWhenProviderGroupNotFound(): void
+    {
+        $registry = $this->makeRegistry([new StubCountryProvider()]);
+
+        $this->expectException(ProviderGroupNotFoundException::class);
+        $this->expectExceptionMessageMatches('/unknown-group/');
+        $registry->getGroupMap('unknown-group');
+    }
+
     public function testEmptyRegistryReturnsEmptyMap(): void
     {
         $registry = $this->makeRegistry([]);

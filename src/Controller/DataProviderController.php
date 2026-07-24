@@ -43,4 +43,16 @@ final class DataProviderController extends AbstractController
 
         return $this->json($result);
     }
+
+    #[Route('/{providerGroup}', name: 'letkode_data_provider_group_map', methods: ['GET'])]
+    public function group(string $providerGroup): JsonResponse
+    {
+        try {
+            $map = $this->registry->getGroupMap($providerGroup);
+        } catch (ProviderGroupNotFoundException $e) {
+            throw new NotFoundHttpException($e->getMessage(), $e);
+        }
+
+        return $this->json($map);
+    }
 }

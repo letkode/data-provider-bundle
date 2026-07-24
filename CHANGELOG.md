@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-07-24
+
+### Added
+- `GET /api/providers/{providerGroup}`: discovery endpoint that lists every provider and its exposed methods within a given `providerGroup`
+- `ProviderRegistry::getGroupMap(string $providerGroup)`: returns the map filtered by group, throwing `ProviderGroupNotFoundException` when unknown
+
+---
+
 ## [1.0.0] - 2026-07-24
 
 ### Added
@@ -28,5 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP `^8.4`
 - Symfony `^7.0 || ^8.0`
 
-[Unreleased]: https://github.com/letkode/data-provider-bundle/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/letkode/data-provider-bundle/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/letkode/data-provider-bundle/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/letkode/data-provider-bundle/releases/tag/1.0.0

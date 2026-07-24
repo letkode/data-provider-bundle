@@ -104,4 +104,26 @@ final class ProviderRegistry
 
         return $map;
     }
+
+    /**
+     * @return array<array{alias: string, methods: string[]}>
+     *
+     * @throws ProviderGroupNotFoundException
+     */
+    public function getGroupMap(string $providerGroup): array
+    {
+        $this->initialize();
+
+        if (!isset($this->providersByGroup[$providerGroup])) {
+            throw new ProviderGroupNotFoundException(\sprintf('Provider group "%s" not found.', $providerGroup));
+        }
+
+        return array_map(
+            fn (string $alias) => [
+                'alias' => $alias,
+                'methods' => array_keys($this->methodMap[$providerGroup][$alias]),
+            ],
+            array_keys($this->providersByGroup[$providerGroup]),
+        );
+    }
 }
