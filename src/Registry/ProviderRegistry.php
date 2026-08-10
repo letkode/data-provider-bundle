@@ -21,6 +21,9 @@ final class ProviderRegistry
 
     private bool $initialized = false;
 
+    /**
+     * @param iterable<object> $providers
+     */
     public function __construct(
         #[AutowireIterator('letkode.data_provider')]
         private readonly iterable $providers,
@@ -62,6 +65,8 @@ final class ProviderRegistry
     }
 
     /**
+     * @return callable(array<string, mixed>=): mixed
+     *
      * @throws ProviderGroupNotFoundException
      * @throws ProviderNotFoundException
      * @throws ProviderMethodNotAllowedException
@@ -82,6 +87,9 @@ final class ProviderRegistry
             throw new ProviderMethodNotAllowedException(\sprintf('Method "%s" is not exposed on "%s/%s".', $methodAlias, $providerGroup, $classAlias));
         }
 
+        // The method name is resolved dynamically from attribute metadata, so PHPStan
+        // cannot statically verify this array is callable against the provider's class.
+        // @phpstan-ignore return.type
         return [$this->providersByGroup[$providerGroup][$classAlias], $this->methodMap[$providerGroup][$classAlias][$methodAlias]];
     }
 

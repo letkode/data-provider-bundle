@@ -15,18 +15,21 @@ use PHPUnit\Framework\TestCase;
 #[DataProvider(providerGroup: 'form-options', alias: 'countries')]
 final class StubCountryProvider
 {
+    /** @return array<int, array{code: string, name: string}> */
     #[DataProviderMethod(alias: 'active')]
     public function findActive(): array
     {
         return [['code' => 'CL', 'name' => 'Chile']];
     }
 
+    /** @return array<int, array{code: string}> */
     #[DataProviderMethod(alias: 'all')]
     public function findAll(): array
     {
         return [['code' => 'CL'], ['code' => 'AR']];
     }
 
+    /** @return array<never> */
     public function notExposed(): array
     {
         return [];
@@ -36,6 +39,7 @@ final class StubCountryProvider
 #[DataProvider(providerGroup: 'form-options', alias: 'roles')]
 final class StubRoleProvider
 {
+    /** @return array<int, string> */
     #[DataProviderMethod(alias: 'list')]
     public function getRoles(): array
     {
@@ -46,6 +50,7 @@ final class StubRoleProvider
 #[DataProvider(providerGroup: 'search', alias: 'countries')]
 final class StubCountrySearchProvider
 {
+    /** @return array<int, array{code: string, name: string, score: float}> */
     #[DataProviderMethod(alias: 'by-name')]
     public function searchByName(): array
     {
@@ -55,6 +60,7 @@ final class StubCountrySearchProvider
 
 final class ProviderRegistryTest extends TestCase
 {
+    /** @param array<object> $providers */
     private function makeRegistry(array $providers): ProviderRegistry
     {
         return new ProviderRegistry(new \ArrayObject($providers));
@@ -77,6 +83,7 @@ final class ProviderRegistryTest extends TestCase
         $callable = $registry->resolve('form-options', 'countries', 'all');
         $result = $callable();
 
+        self::assertIsArray($result);
         self::assertCount(2, $result);
     }
 
@@ -218,6 +225,6 @@ final class ProviderRegistryTest extends TestCase
         $registry->resolve('form-options', 'countries', 'active');
         $callable = $registry->resolve('form-options', 'countries', 'active');
 
-        self::assertIsCallable($callable);
+        self::assertSame([['code' => 'CL', 'name' => 'Chile']], $callable());
     }
 }

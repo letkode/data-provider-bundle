@@ -17,7 +17,7 @@ Symfony Flex will register the bundle automatically. If not using Flex, add it m
 ```php
 // config/bundles.php
 return [
-    Letkode\DataProviderBundle\DataProviderBundle::class => ['all' => true],
+    Letkode\DataProviderBundle\LetkodeDataProviderBundle::class => ['all' => true],
 ];
 ```
 
@@ -101,7 +101,7 @@ GET /api/providers/form-options
 
 ## How it works
 
-- `DataProviderBundle::build()` calls `registerAttributeForAutoconfiguration()` so any service annotated with `#[DataProvider]` is automatically tagged as `letkode.data_provider`.
+- `LetkodeDataProviderBundle::build()` calls `registerAttributeForAutoconfiguration()` so any service annotated with `#[DataProvider]` is automatically tagged as `letkode.data_provider`.
 - `ProviderRegistry` collects all tagged providers via `#[AutowireIterator]` and indexes them in three levels: `providerGroup → classAlias → methodAlias`.
 - `DataProviderController` resolves `providerGroup` + `classAlias` + `methodAlias` and returns the result as JSON. Query parameters, if present, are passed as a single array argument to the resolved method.
 - `DataProviderController` also exposes `GET /api/providers/{providerGroup}` to list every provider and its exposed methods within a given group, for runtime discovery.

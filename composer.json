@@ -27,7 +27,7 @@
     "extra": {
         "symfony": {
             "bundles": {
-                "Letkode\\DataProviderBundle\\DataProviderBundle": ["all"]
+                "Letkode\\DataProviderBundle\\LetkodeDataProviderBundle": ["all"]
             }
         }
     }

@@ -11,6 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-08-10
+
+### Changed
+- **Breaking**: bundle class renamed from `DataProviderBundle` to `LetkodeDataProviderBundle`, matching the `Letkode{Name}Bundle` naming convention used by every other Letkode bundle. This also fixes the `@LetkodeDataProviderBundle` alias already referenced by `config/routes.yaml` and the README, which never resolved correctly under the old class name.
+  - Update `config/bundles.php`: `Letkode\DataProviderBundle\LetkodeDataProviderBundle::class`
+
+### Fixed
+- `ProviderRegistry::resolve()` return type and `LetkodeDataProviderBundle::build()` autoconfiguration callback now match Symfony's expected contracts (phpstan level 9, previously unchecked)
+
+---
+
 ## [1.1.0] - 2026-07-24
 
 ### Added
@@ -36,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP `^8.4`
 - Symfony `^7.0 || ^8.0`
 
-[Unreleased]: https://github.com/letkode/data-provider-bundle/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/letkode/data-provider-bundle/compare/1.2.0...HEAD
+[1.2.0]: https://github.com/letkode/data-provider-bundle/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/letkode/data-provider-bundle/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/letkode/data-provider-bundle/releases/tag/1.0.0

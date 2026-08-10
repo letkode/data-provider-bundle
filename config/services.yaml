@@ -7,6 +7,6 @@ services:
     Letkode\DataProviderBundle\:
         resource: '../src/'
         exclude:
-            - '../src/DataProviderBundle.php'
+            - '../src/LetkodeDataProviderBundle.php'
             - '../src/Attribute/'
             - '../src/Exception/'
