@@ -32,7 +32,7 @@ letkode_data_provider:
 or let the bundle write that file for you:
 
 ```bash
-vendor/bin/letkode-publish data-provider
+bin/console letkode:config:publish data-provider
 ```
 
 It never overwrites an existing file unless you add `--force`. `--dry-run` shows what it would do.
