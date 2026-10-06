@@ -5,6 +5,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "letkode/config-publisher": "^1.0",
         "symfony/dependency-injection": "^7.0 || ^8.0",
         "symfony/framework-bundle": "^7.0 || ^8.0",
         "symfony/routing": "^7.0 || ^8.0"
@@ -28,6 +29,11 @@
         "symfony": {
             "bundles": {
                 "Letkode\\DataProviderBundle\\LetkodeDataProviderBundle": ["all"]
+            }
+        },
+        "letkode": {
+            "publish": {
+                "config/routes/letkode_data_provider.yaml": "resources/config/letkode_data_provider.routes.yaml.dist"
             }
         }
     }

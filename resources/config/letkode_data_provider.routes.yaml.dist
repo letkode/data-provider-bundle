@@ -1,0 +1,4 @@
+# Exposes the data provider endpoints (GET /api/providers/...).
+# Delete this file to switch them off.
+letkode_data_provider:
+    resource: '@LetkodeDataProviderBundle/config/routes.yaml'
